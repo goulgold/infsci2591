@@ -1,65 +1,49 @@
 #include <iostream>
 #include <stdlib.h>
-#include <vector>
-#include <array>
+#include <math.h>
 
 using std::cout;
 using std::endl;
-using std::vector;
-using std::array;
 
 int ret_mul(int a, int b);
 
 int ret_mul(int a, int b) {
     //Implement algorithm here
-    vector<int> a_num, b_num;
-    while (a != 0) {
-        a_num.push_back(a % 10);
+    int a_size = 0;
+    int b_size = 0;
+    while ( a / (int) (pow10(a_size)) != 0) {
+        a_size++;
+    }
+    while (b / (int) (pow10(b_size)) != 0) {
+        b_size++;
+    }
+    if (a_size == 0 || b_size == 0) return 0;
+    int *a_num = new int[a_size];
+    for (int i = 0; i < a_size; ++i) {
+        a_num[i] = a % 10;
         a = a / 10;
     }
-    while (b != 0) {
-        b_num.push_back(b % 10);
+    int *b_num = new int[b_size];
+    for (int i = 0; i < b_size; ++i) {
+        b_num[i] = b % 10;
         b = b / 10;
     }
-    int a_size = a_num.size();
-    int b_size = b_num.size();
-    if (a_size == 0 || b_size == 0) return 0;
-    // new memory space
-    int **p = new int*[2*a_size];
-    for (int i = 0; i < 2*a_size; ++i) {
-        p[i] = new int [2*b_size];
-    }
+    int *result = new int[a_size + b_size];
     for (int i = 0; i < a_size; ++i) {
         for (int j = 0; j < b_size; ++j) {
-            p[2*i][2*j] = (a_num[i] * b_num[j]) % 10;
-            p[2*i+1][2*j+1] = (a_num[i] * b_num[j]) / 10;
+            result[i+j] += (a_num[i] * b_num[j]) % 10;
+            result[i+j+1] += (a_num[i] * b_num[j]) / 10;
+            if (result[i+j] >= 10) {
+                 result[i+j+1] += result[i+j] / 10;
+                 result[i+j] = result[i+j] % 10;
+            }
         }
     }
-    int* result = new int[a_size + b_size];
-    int c = 0;
-    for (int i = 0; i < (a_size + b_size); ++i) {
-        int index = (a_size + b_size - 1 - i);
-        result[index] += c;
-        int j = (2*i<2*a_size?2*i:2*a_size-1);
-        while (j >=0 && (2*i - j) <= 2*b_size-1) {
-            result[index] += p[j][2*i-j];
-            j--;
-        }
-        c = result[index] / 10;
-        result[index] = result[index] % 10;
+    int t_result = 0;
+    for (int i = (a_size + b_size - 1); i >= 0; --i) {
+         t_result = t_result * 10 + result[i];
     }
-
-    // free memory space after usage.
-    for (int i = 0; i < a_size; ++i) {
-         delete [] p[i];
-    }
-    delete [] p;
-    int r_num = 0;
-    for (int i = 0; i < a_size + b_size; ++i) {
-        r_num = r_num * 10 + result[i];
-    }
-    return r_num;
-
+    return t_result;
 }
 
 int main (int argc, char *argv[]) {
