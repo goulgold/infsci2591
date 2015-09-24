@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <ctime>
 
 using std::cout;
 using std::endl;
@@ -43,6 +44,7 @@ int ret_mul(int a, int b) {
     for (int i = (a_size + b_size - 1); i >= 0; --i) {
          t_result = t_result * 10 + result[i];
     }
+    delete[] a_num, b_num, result;
     return t_result;
 }
 
@@ -53,7 +55,10 @@ int main (int argc, char *argv[]) {
     }
     int a = atoi(argv[1]);
     int b = atoi(argv[2]);
+    std::clock_t start = std::clock();
+    double duration;
     int result = ret_mul(a,b);
     cout << a << " * " << b << " = " << result << endl;
+    cout << "Time elapsed: " << (std::clock() - start) / 1000.0 << " ms." << endl;
     return 0;
 }
