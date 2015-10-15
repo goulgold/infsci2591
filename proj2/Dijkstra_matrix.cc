@@ -5,8 +5,10 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <string>
 #include "Graph_Matrix.h"
 
+using std::string;
 using std::cout;
 using std::endl;
 using std::min;
@@ -69,20 +71,34 @@ void Dijkstra (Graph& graph, int* edges, int* weights, int origin) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        cout << "Parameter: Dijkstra matrix_file origin\n";
+    if (argc != 4) {
+        cout << "Useage: Dijkstra -f matrix_file origin\n"
+             << "        Dijkstra -n num_vertex origin\n";
         exit(1);
     }
-    ifstream file;
-    file.open(argv[1]);
-    int origin = atoi(argv[2]);
-    Graph* pgraph = new Graph(file);
-    file.close();
-    int num_vertex = pgraph->getNumVertex();
+    string param = argv[1];
+    int origin = atoi(argv[3]);
+    int num_vertex;
+    Graph* pgraph;
+    if (param == "-f") {
+        ifstream file;
+        file.open(argv[2]);
+        pgraph = new Graph(file);
+        num_vertex = pgraph->getNumVertex();
+        file.close();
+    } else if (param == "-n") {
+        num_vertex = atoi(argv[2]);
+        pgraph = new Graph(num_vertex);
+    } else {
+        cout << "Useage: Dijkstra -f matrix_file origin\n"
+             << "        Dijkstra -n num_vertex origin\n";
+        exit(1);
+    }
+
     int* PathEdges = new int[num_vertex];
     int* ShortestWeight = new int[num_vertex];
-    Dijkstra(*pgraph, PathEdges, ShortestWeight, origin);
     pgraph->Show();
+    Dijkstra(*pgraph, PathEdges, ShortestWeight, origin);
     for (int i = 0; i <num_vertex; ++i) {
          cout << ShortestWeight[i] << " ";
     }

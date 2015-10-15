@@ -27,6 +27,29 @@ Graph::Graph(ifstream& file) {
     }
 }
 
+Graph::Graph(int n) {
+    num_vertex = n;
+    weightMatrix_ = new int*[num_vertex];
+    for (int i = 0; i < num_vertex; ++i) {
+        weightMatrix_[i] = new int[num_vertex];
+    }
+    for (int i = 0; i < num_vertex; ++i) {
+        for (int j = 0; j < num_vertex; ++j) {
+            setWeight(i,j,-1);
+        }
+    }
+    int connect;
+    srand(time(NULL));
+    for (int i = 1; i < num_vertex; ++i) {
+        connect = rand() % i;
+        setWeight(i, connect, rand() % MAX_WEIGHT);
+        if (rand() % 100 > 80) {
+            connect = rand() % i;
+            setWeight(i, connect, rand() % MAX_WEIGHT);
+        }
+    }
+
+}
 Graph::~Graph() {
     for (int i = 0; i < num_vertex; ++i) {
         delete[] weightMatrix_[i];
@@ -47,6 +70,7 @@ int Graph::getWeight(int i, int j) {
 }
 
 int Graph::setWeight(int i, int j, int weight) {
+    weightMatrix_[j][i] = weight;
     weightMatrix_[i][j] = weight;
     return 0;
 }
