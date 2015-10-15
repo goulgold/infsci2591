@@ -23,6 +23,7 @@ class Graph {
     public:
         Graph(ifstream& file);
         ~Graph();
+        bool isNeighbor(int i, int j);
         int getWeight(int i, int j);
         int setWeight(int i, int j, int weight);
         int getNumVertex();

@@ -34,6 +34,14 @@ Graph::~Graph() {
     delete[] weightMatrix_;
 }
 
+bool Graph::isNeighbor(int i, int j) {
+    if (Graph::getWeight(i, j) != -1) {
+        return true;
+    } else {
+         return false;
+    }
+}
+
 int Graph::getWeight(int i, int j) {
     return weightMatrix_[i][j];
 }
