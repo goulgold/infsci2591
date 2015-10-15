@@ -16,10 +16,17 @@ void Floyd (Graph& origin, Graph& result) {
     for (int k = 0; k < n; ++k) {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                int new_wt = min(result.getWeight(i,j), result.getWeight(i,k) + result.getWeight(k,j));
-                if (!result.setWeight(i,j,new_wt)) {
-                    cout << "weight updated failed.\n";
-                    exit(1);
+                if (result.getWeight(i,k) == -1 || result.getWeight(k,j) == -1) {
+                    continue;
+                } else if (result.getWeight(i,j) == -1) {
+                    result.setWeight(i,j,result.getWeight(i,k) + result.getWeight(k,j));
+                }
+                else {
+                    int new_wt = min(result.getWeight(i,j), result.getWeight(i,k) + result.getWeight(k,j));
+                    if (result.setWeight(i,j,new_wt)) {
+                        cout << "weight updated failed.\n";
+                        exit(1);
+                    }
                 }
             }
         }
@@ -31,9 +38,13 @@ int main(int argc, char* argv[]) {
         cout << "Parameter: Floyd matrix_file\n";
         exit(1);
     }
-    ifstream file;
-    file.open(argv[1]);
-    Graph* mygraph = new Graph(file);
-    mygraph->Show();
+    ifstream file1, file2;
+    file1.open(argv[1]);
+    file2.open(argv[1]);
+    Graph* origin = new Graph(file1);
+    Graph* result = new Graph(file2);
+    result->Show();
+    Floyd(*origin, *result);
+    result->Show();
     return 0;
 }

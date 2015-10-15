@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <climits>
 using std::cout;
 using std::endl;
 using std::ifstream;

@@ -19,7 +19,7 @@ Graph::Graph(ifstream& file) {
     int index = 0;
     while (file >> temp) {
         if (temp == ".") {
-             weightMatrix_[index/num_vertex][index%num_vertex] = -1;
+        weightMatrix_[index/num_vertex][index%num_vertex] = -1;
         } else {
             weightMatrix_[index/num_vertex][index%num_vertex] = atoi(temp.c_str());
         }
