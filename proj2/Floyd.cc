@@ -33,6 +33,7 @@ int main(int argc, char* argv[]) {
     }
     ifstream file;
     file.open(argv[1]);
-    cout << "test" << endl;
+    Graph* mygraph = new Graph(file);
+    mygraph->Show();
     return 0;
 }

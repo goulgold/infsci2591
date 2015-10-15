@@ -10,19 +10,20 @@ Graph::Graph(ifstream& file) {
     while (getline(file, temp)) {
         num_vertex++;
     }
-    file.seekg(file.beg);
+    file.clear();
+    file.seekg(0, file.beg);
     weightMatrix_ = new int*[num_vertex];
     for (int i = 0; i < num_vertex; ++i) {
         weightMatrix_[i] = new int[num_vertex];
     }
     int index = 0;
-    while (file.good()) {
-        file >> temp;
+    while (file >> temp) {
         if (temp == ".") {
              weightMatrix_[index/num_vertex][index%num_vertex] = -1;
         } else {
             weightMatrix_[index/num_vertex][index%num_vertex] = atoi(temp.c_str());
         }
+        index++;
     }
 }
 
@@ -44,4 +45,13 @@ int Graph::setWeight(int i, int j, int weight) {
 
 int Graph::getNumVertex() {
      return num_vertex;
+}
+
+void Graph::Show() {
+    for (int i = 0; i < num_vertex; ++i) {
+        for (int j = 0; j < num_vertex; ++j) {
+            cout << weightMatrix_[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
