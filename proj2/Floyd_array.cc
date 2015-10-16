@@ -47,8 +47,8 @@ int main(int argc, char* argv[]) {
     int num_vertex;
     if (param == "-f") {
         ifstream file1, file2;
-        file1.open(argv[1]);
-        file2.open(argv[1]);
+        file1.open(argv[2]);
+        file2.open(argv[2]);
         Graph* origin = new Graph(file1);
         Graph* result = new Graph(file2);
         result->Show();

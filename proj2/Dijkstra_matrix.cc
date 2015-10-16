@@ -25,15 +25,17 @@ void Dijkstra (Graph& graph, int* edges, int* weights, int origin) {
             touch[i] = 0;
             length[i] = 0;
             weights[i] = 0;
-            edges[i] = i;
+            edges[i] = -1;
         } else if (graph.isNeighbor(i, origin)) {
             touch[i] = origin;
             length[i] = graph.getWeight(i, origin);
             weights[i] = length[i];
+            edges[i] = origin;
         } else {
              touch[i] = -1;
              length[i] = -1;
              weights[i] = length[i];
+             edges[i] = -1;
         }
     }
 
@@ -103,5 +105,16 @@ int main(int argc, char* argv[]) {
          cout << ShortestWeight[i] << " ";
     }
     cout << endl;
+    for (int i = 0; i < num_vertex; ++i) {
+        if (PathEdges[i] != -1) {
+            int index = PathEdges[i];
+            cout << i << "-->";
+            while (index != origin) {
+                cout << index << "-->";
+                index = PathEdges[index];
+            }
+        cout << origin << endl;
+        }
+    }
     return 0;
 }
