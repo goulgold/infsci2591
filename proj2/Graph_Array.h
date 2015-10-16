@@ -1,6 +1,6 @@
-#ifndef GRAPH_LIST_
-#define GRAPH_LIST_
-/* Graph implemented by linked list
+#ifndef GRAPH_MATRIX_
+#define GRAPH_MATRIX_
+/* Graph implemented by 2-D matrix
  * Qiming Guo
  * Oct 15 2015
  */
@@ -20,26 +20,15 @@ using std::string;
 
 class Graph {
     private:
-        struct edgeNode {
-            int index;
-            int weight;
-            edgeNode* next;
-            edgeNode(int n, int w): index(n), weight(w), next(nullptr) {}
-        };
-        edgeNode** vertexs;
         int num_vertex;
-        int **weightMatrix_;
-        edgeNode** ptrs;
-        void addEdge(int i, int j, int weight);
+        int *weightMatrix_;
     public:
         Graph(ifstream& file);
         Graph(int n);
         ~Graph();
-        void outputMatrix(int** output);
+        bool isNeighbor(int i, int j);
         int getWeight(int i, int j);
         int setWeight(int i, int j, int weight);
-        int nextNeighbor(int index);
-        int thisWeight(int index);
         int getNumVertex();
         void Show();
 };

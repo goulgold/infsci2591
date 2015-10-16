@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <climits>
+#include "util.h"
 using std::cout;
 using std::endl;
 using std::ifstream;

@@ -35,28 +35,15 @@ void Floyd (Graph& origin, Graph& result) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        cout << "Useage: Dijkstra -f matrix_file\n"
-             << "        Dijkstra -n num_vertex\n";
+    if (argc != 2) {
+        cout << "Parameter: Floyd matrix_file\n";
         exit(1);
     }
-    string param = argv[1];
-    Graph *origin, *result;
-    if (param == "-f") {
-     ifstream file1, file2;
-    file1.open(argv[2]);
-    file2.open(argv[2]);
-    origin = new Graph(file1);
-    result = new Graph(file2);
-    } else if (param == "-n") {
-        int num_vertex = atoi(argv[2]);
-        origin = new Graph(num_vertex);
-        result = origin;
-    } else {
-        cout << "Useage: Dijkstra -f matrix_file origin\n"
-             << "        Dijkstra -n num_vertex origin\n";
-        exit(1);
-    }
+    ifstream file1, file2;
+    file1.open(argv[1]);
+    file2.open(argv[1]);
+    Graph* origin = new Graph(file1);
+    Graph* result = new Graph(file2);
     result->Show();
     Floyd(*origin, *result);
     result->Show();
