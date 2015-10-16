@@ -1,4 +1,4 @@
-#include "Graph_List.h"
+#include "include/Graph_List.h"
 
 Graph::Graph(ifstream& file) {
     if (!file.is_open()) {

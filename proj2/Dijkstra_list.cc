@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
-#include "Graph_List.h"
+#include "include/Graph_List.h"
 
 using std::string;
 using std::cout;
@@ -27,7 +27,7 @@ void Dijkstra (Graph& graph, int* edges, int* weights, int origin) {
     // Initialize touch[] and length[]
     // based on list
     int neighbor = graph.nextNeighbor(origin);
-    while (neighbor > 0) {
+    while (neighbor >= 0) {
         touch[neighbor] = origin;
         length[neighbor] = graph.thisWeight(origin);
         weights[neighbor] = length[neighbor];

@@ -30,7 +30,7 @@ class Graph {
         int getWeight(int i, int j);
         int setWeight(int i, int j, int weight);
         int getNumVertex();
-        void Show();
+        void Show() const;
 };
 
 #endif

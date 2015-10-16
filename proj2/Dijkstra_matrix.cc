@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
-#include "Graph_Matrix.h"
+#include "include/Graph_Matrix.h"
 
 using std::string;
 using std::cout;

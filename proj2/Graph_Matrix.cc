@@ -1,4 +1,4 @@
-#include "Graph_Matrix.h"
+#include "include/Graph_Matrix.h"
 
 Graph::Graph(ifstream& file) {
     if (!file.is_open()) {
@@ -43,14 +43,14 @@ Graph::Graph(int n) {
     for (int i = 1; i < num_vertex; ++i) {
 #ifdef COMPLETE_GRAPH
         for (int j = 0; j < i; ++j) {
-             setWeight(i, j, rand() % MAX_WEIGHT);
+             setWeight(i, j, rand() % MAX_WEIGHT + 1);
         }
 #else
         connect = rand() % i;
-        setWeight(i, connect, rand() % MAX_WEIGHT);
+        setWeight(i, connect, rand() % MAX_WEIGHT + 1);
         if (rand() % 100 > 80) {
             connect = rand() % i;
-            setWeight(i, connect, rand() % MAX_WEIGHT);
+            setWeight(i, connect, rand() % MAX_WEIGHT + 1);
         }
 #endif
     }

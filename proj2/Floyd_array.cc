@@ -5,8 +5,10 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
-#include "Graph_Matrix.h"
+#include <string>
+#include "include/Graph_Array.h"
 
+using std::string;
 using std::cout;
 using std::endl;
 using std::min;
@@ -35,17 +37,29 @@ void Floyd (Graph& origin, Graph& result) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        cout << "Parameter: Floyd matrix_file\n";
+    if (argc != 3) {
+        cout << "Useage: -f matrix_file\n"
+             << "        -n num_vertex\n";
         exit(1);
     }
-    ifstream file1, file2;
-    file1.open(argv[1]);
-    file2.open(argv[1]);
-    Graph* origin = new Graph(file1);
-    Graph* result = new Graph(file2);
-    result->Show();
-    Floyd(*origin, *result);
-    result->Show();
-    return 0;
+
+    string param = argv[1];
+    int num_vertex;
+    if (param == "-f") {
+        ifstream file1, file2;
+        file1.open(argv[1]);
+        file2.open(argv[1]);
+        Graph* origin = new Graph(file1);
+        Graph* result = new Graph(file2);
+        result->Show();
+        Floyd(*origin, *result);
+        result->Show();
+        return 0;
+    } else if (param == "-n") {
+        Graph* origin = new Graph(atoi(argv[2]));
+        origin->Show();
+        Graph* result = origin;
+        Floyd(*origin, *result);
+        result->Show();
+    }
 }

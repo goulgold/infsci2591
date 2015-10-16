@@ -6,16 +6,17 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
-#include "Graph_Matrix.h"
+#include "include/Graph_Array.h"
 
 using std::string;
 using std::cout;
 using std::endl;
 using std::min;
 
+
 void Dijkstra (Graph& graph, int* edges, int* weights, int origin) {
-    int num_vertex = graph.getNumVertex();
     int vnear;
+    int num_vertex = graph.getNumVertex();
     int* touch = new int[num_vertex];
     int* length = new int[num_vertex];
 
@@ -94,7 +95,6 @@ int main(int argc, char* argv[]) {
              << "        Dijkstra -n num_vertex origin\n";
         exit(1);
     }
-
     int* PathEdges = new int[num_vertex];
     int* ShortestWeight = new int[num_vertex];
     pgraph->Show();
@@ -102,6 +102,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i <num_vertex; ++i) {
          cout << ShortestWeight[i] << " ";
     }
+    delete PathEdges;
+    delete ShortestWeight;
     cout << endl;
     return 0;
 }
