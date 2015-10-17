@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include "include/Graph_Array.h"
+#include "include/util.h"
 
 using std::string;
 using std::cout;
@@ -51,15 +52,23 @@ int main(int argc, char* argv[]) {
         file2.open(argv[2]);
         Graph* origin = new Graph(file1);
         Graph* result = new Graph(file2);
-        result->Show();
+#ifdef VERBOSE
+        origin->Show();
+#endif
         Floyd(*origin, *result);
+#ifdef VERBOSE
         result->Show();
+#endif
         return 0;
     } else if (param == "-n") {
         Graph* origin = new Graph(atoi(argv[2]));
-        origin->Show();
         Graph* result = origin;
+#ifdef VERBOSE
+        origin->Show();
+#endif
         Floyd(*origin, *result);
+#ifdef VERBOSE
         result->Show();
+#endif
     }
 }

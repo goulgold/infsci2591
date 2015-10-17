@@ -48,13 +48,8 @@ Graph::Graph(int n) {
 #else
         connect = rand() % i;
         setWeight(i, connect, rand() % MAX_WEIGHT + 1);
-        if (rand() % 100 > 80) {
-            connect = rand() % i;
-            setWeight(i, connect, rand() % MAX_WEIGHT + 1);
-        }
 #endif
     }
-
 }
 Graph::~Graph() {
     for (int i = 0; i < num_vertex; ++i) {

@@ -13,7 +13,7 @@ endif
 TARGETS=Floyd_matrix Dijkstra_matrix Floyd_list Dijkstra_list Floyd_array Dijkstra_array
 all: ${TARGETS}
 
-${TARGETS}: 
+${TARGETS}: include/*.h
 
 
 Floyd_matrix: Floyd_matrix.cc Graph_Matrix.cc 

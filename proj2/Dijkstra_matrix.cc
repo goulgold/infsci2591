@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include "include/Graph_Matrix.h"
+#include "include/util.h"
 
 using std::string;
 using std::cout;
@@ -99,8 +100,9 @@ int main(int argc, char* argv[]) {
 
     int* PathEdges = new int[num_vertex];
     int* ShortestWeight = new int[num_vertex];
-    pgraph->Show();
     Dijkstra(*pgraph, PathEdges, ShortestWeight, origin);
+#ifdef VERBOSE
+    pgraph->Show();
     for (int i = 0; i <num_vertex; ++i) {
          cout << ShortestWeight[i] << " ";
     }
@@ -116,5 +118,6 @@ int main(int argc, char* argv[]) {
         cout << origin << endl;
         }
     }
+#endif
     return 0;
 }

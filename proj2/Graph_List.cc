@@ -35,20 +35,22 @@ Graph::Graph(int n) {
     int connect;
     int weight;
     srand(time(NULL));
+#ifdef COMPLETE_GRAPH
     for (int i = 1; i < num_vertex; ++i) {
-         connect = rand() % i;
-        weight = rand() % MAX_WEIGHT;
+        for (int j = 0; j > i; ++j) {
+            weight = rand() % MAX_WEIGHT + 1;
+            addEdge(i, j, weight);
+            addEdge(j, i, weight);
+        }
+    }
+#else
+    for (int i = 1; i < num_vertex; ++i) {
+        connect = rand() % i;
+        weight = rand() % MAX_WEIGHT + 1;
         addEdge(i, connect, weight);
         addEdge(connect, i, weight);
-         if (rand() % 100 > 80) {
-            connect = rand() % i;
-            weight = rand() % MAX_WEIGHT;
-            addEdge(i, connect, weight);
-            addEdge(connect, i, weight);
-
-         }
     }
-
+#endif
 }
 
 Graph::~Graph() {

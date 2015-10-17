@@ -35,15 +35,20 @@ Graph::Graph(int n) {
     }
     int connect;
     srand(time(NULL));
+#ifdef COMPLETE_GRAPH
+    for (int i = 1; i < n; ++i) {
+        for (int j = 0; j < 1; ++j) {
+            if (i != j) {
+                setWeight(i,j, rand() % MAX_WEIGHT + 1);
+            }
+        }
+    }
+#else
     for (int i = 1; i < n; ++i) {
         connect = rand() % i;
         setWeight(i, connect, rand() % MAX_WEIGHT + 1);
-        if (rand() % 100 > 30) {
-            connect = rand() % i;
-            setWeight(i, connect, rand() % MAX_WEIGHT + 1);
-        }
     }
-
+#endif
 }
 Graph::~Graph() {
     //TODO

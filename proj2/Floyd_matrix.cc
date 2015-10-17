@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <fstream>
 #include "include/Graph_Matrix.h"
+#include "include/util.h"
 
 using std::cout;
 using std::endl;
@@ -57,8 +58,12 @@ int main(int argc, char* argv[]) {
              << "        Dijkstra -n num_vertex origin\n";
         exit(1);
     }
-    result->Show();
+#ifdef VERBOSE
+    origin->Show();
+#endif
     Floyd(*origin, *result);
+#ifdef VERBOSE
     result->Show();
+#endif
     return 0;
 }

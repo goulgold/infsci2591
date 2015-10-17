@@ -7,6 +7,7 @@
 #include <string>
 #include <fstream>
 #include "include/Graph_List.h"
+#include "include/util.h"
 
 using std::string;
 using std::cout;
@@ -76,10 +77,14 @@ int main(int argc, char* argv[]) {
             result[i][j] = -1;
         }
     }
+#ifdef VERBOSE
     origin->Show();
+#endif
     origin->outputMatrix(result);
     Floyd(result, num_vertex);
+#ifdef VERBOSE
     ShowMatrix(result, num_vertex);
+#endif
 
     return 0;
 }
