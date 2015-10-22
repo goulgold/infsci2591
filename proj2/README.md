@@ -5,3 +5,8 @@
  Implemented in C++
 
  Use "make" to compile.
+
+ include/util.h includes some configurations.
+
+ COMPLETE_GRAPH means whether the graph is complete.
+ VERBOSE means whether programs would print result verbosely.
