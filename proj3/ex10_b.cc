@@ -5,43 +5,9 @@
 #include <queue>
 #include <cstdio>
 #include <set>
+#include "util.h"
 
 using namespace std;
-
-int **allocMatrix(int size) {
-  int **matrix;
-  matrix = (int **)malloc(size * sizeof(int *));
-  for (int row = 0; row < size; row++) {
-    matrix[row] = (int *)malloc(size * sizeof(int));
-  }
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      matrix[i][j] = 0;
-    }
-  }
-  return matrix;
-}
-
-int readMatrixFile(int **matrix, int N, char *filename){
-
-  FILE *ifp, *ofp;
-  ifp = fopen(filename, "r");
-
-  if (ifp == NULL) {
-    fprintf(stderr, "Can't open input file in.list!\n");
-    return 1;
-  }
-
-  for (int i=0; i<N; i++) {
-    for (int j=0; j<N; j++) {
-      if (!fscanf(ifp, "%d", &matrix[i][j])) {
-	fprintf(stderr, "Unable to read!\n");
-	return 1;
-      }
-    }
-  }
-  return 0;
-}
 
 class TSP {
     private:
@@ -169,12 +135,30 @@ int TSP::n_;
 int **TSP::W_;
 
 int main(int argc, char* argv[]) {
-
-    int n = 5;
-    vector<int> opttour;
-    int minlength;
-    int **w = allocMatrix(n+1);
-    readMatrixFile(w, n+1, argv[1]);
+    int n;
+    int **w;
+    string param = argv[1];
+    if (param == "-f") {
+        if (argc != 4) {
+            cout << "error" << endl;
+            return -1;
+        }
+        n = atoi(argv[3]);
+        w = allocMatrix(n+1);
+        readMatrixFile(w, n+1, argv[2]);
+    } else if (param == "-n") {
+         if (argc != 3) {
+            cout << "error" << endl;
+            return -1;
+        }
+        n = atoi(argv[2]);
+        w = randomMatrix(n+1);
+    } else {
+        cout << "error" << endl;
+        return -1;
+    }
+        vector<int>opttour;
+        int minlength;
     TSP::tsp(n, w, opttour, minlength);
     cout << minlength << endl;
     vector<int>::iterator it;

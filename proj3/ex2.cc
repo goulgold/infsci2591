@@ -54,7 +54,7 @@ class Knapsack {
                 if (u.level <= n_) {
                     u.weight = v.weight + w[u.level];
                     u.profit = v.profit + p[u.level];
-                    if (u.profit > maxprofit && u.weight < W) {
+                    if (u.profit > maxprofit && u.weight <= W) {
                         maxprofit = u.profit;
                     }
                     if (bound(u) > maxprofit) {
@@ -76,11 +76,11 @@ int Knapsack::n_;
 int Knapsack::W_;
 
 int main(int argc, char* argv[]) {
-    int level = 4;
-    int p_[] = {0, 40, 30, 50, 10};
-    int w_[] = {0, 2, 5, 10, 5};
+    int level = 5;
+    int p_[] = {0, 20, 30, 35, 12, 3};
+    int w_[] = {0, 2, 5, 7, 3, 1};
     int result;
-    Knapsack::knapsack(level, p_, w_, 16, result);
+    Knapsack::knapsack(level, p_, w_, 13, result);
     cout << result << endl;
     return 0;
 }
